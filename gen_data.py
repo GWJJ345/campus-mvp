@@ -30,7 +30,7 @@ for i in range(1, 201):
 # 3. 生成订单
 orders = []
 base_time = datetime(2024, 1, 1)
-for i in range(1, 10001):
+for i in range(1, 1000001):
     order_time = base_time + timedelta(
         days=random.randint(0, 30),
         hours=random.randint(0, 23),
