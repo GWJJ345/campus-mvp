@@ -1,0 +1,7 @@
+# 忽略所有生成的数据文件
+*.csv
+*.db
+image.png
+
+# 忽略 Python 缓存
+__pycache__/
