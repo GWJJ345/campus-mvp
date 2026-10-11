@@ -68,4 +68,31 @@ ORDER BY f.first_date, day_diff
 print("\n6. 留存分析（第1/3/7天复购）:")
 print(pd.read_sql(sql6, conn).head(20))
 
+# 指标7：客单价 (AOV)
+sql7 = "SELECT SUM(amount) / COUNT(DISTINCT order_id) AS aov FROM orders"
+print("\n7. 客单价 (AOV):")
+print(pd.read_sql(sql7, conn).iloc[0, 0])
+
+# 指标8：复购率 (Repurchase Rate)
+sql8 = """
+SELECT CAST(SUM(CASE WHEN cnt >= 2 THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) AS repurchase_rate
+FROM (
+    SELECT buyer_id, COUNT(order_id) AS cnt
+    FROM orders
+    GROUP BY buyer_id
+) t;
+"""
+print("\n8. 复购率:")
+print(pd.read_sql(sql8, conn).iloc[0, 0])
+
+# 指标9：下单时段偏好（按小时）
+sql9 = """
+SELECT strftime('%H', order_time) AS hour, COUNT(*) AS order_count
+FROM orders
+GROUP BY hour
+ORDER BY hour;
+"""
+print("\n9. 下单时段偏好（按小时）:")
+print(pd.read_sql(sql9, conn))
+
 conn.close()
