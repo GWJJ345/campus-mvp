@@ -30,10 +30,11 @@
   - 窗口函数 / CTE
         ↓
   [终端输出最终指标]  (GMV, UV, 留存率, 客单价...)
+  ```
 
 ## 📊 核心业务指标
 GMV（商品交易总额）：SUM(amount)
-```
+
 
 UV（下单用户数）：COUNT(DISTINCT buyer_id)
 
