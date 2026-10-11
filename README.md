@@ -10,7 +10,25 @@
 - **开发工具**：VS Code, Git
 
 ## 🏗️ 数据流架构
-（这里放你的数据流图）
+[Python 生成模拟数据]  (gen_data.py)
+        ↓
+  users.csv / items.csv / orders.csv  (原始数据层)
+        ↓
+[Pandas 清洗与关联]  (analyze.py)
+  - 剔除 amount 空值
+  - 关联用户、商品表
+        ↓
+  orders_joined.csv  (清洗关联层)
+        ↓
+[SQLite 数据库写入]  (to_sqlite.py)
+        ↓
+  campus.db  (数据存储层)
+        ↓
+[SQL 指标计算]  (retention.py)
+  - 聚合 (GROUP BY)
+  - 窗口函数 / CTE
+        ↓
+  [终端输出最终指标]  (GMV, UV, 留存率, 客单价...)
 
 ## 📊 核心业务指标
 GMV（商品交易总额）：SUM(amount)
