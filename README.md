@@ -10,6 +10,7 @@
 - **开发工具**：VS Code, Git
 
 ## 🏗️ 数据流架构
+```
 [Python 生成模拟数据]  (gen_data.py)
         ↓
   users.csv / items.csv / orders.csv  (原始数据层)
@@ -32,6 +33,7 @@
 
 ## 📊 核心业务指标
 GMV（商品交易总额）：SUM(amount)
+```
 
 UV（下单用户数）：COUNT(DISTINCT buyer_id)
 
