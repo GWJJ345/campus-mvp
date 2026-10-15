@@ -15,9 +15,9 @@ print("2. 总 UV:", pd.read_sql(sql2, conn)["uv"][0])
 
 # 指标3：各校区 GMV
 sql3 = """
-SELECT campus, SUM(amount) AS gmv
+SELECT campus_x AS campus, SUM(amount) AS gmv
 FROM orders
-GROUP BY campus
+GROUP BY campus_x
 ORDER BY gmv DESC
 """
 print("\n3. 各校区 GMV:")
