@@ -26,6 +26,7 @@ for i in range(1, 201):
         "price": round(random.uniform(10, 500), 2),
         "category": random.choice(categories),
     })
+item_prices = {item["item_id"]: item["price"] for item in items}
 
 # 3. 生成订单（流式写入版）
 print("开始生成订单数据...")
@@ -35,7 +36,7 @@ with open("orders.csv", "w", newline="", encoding="utf-8") as f:
     writer.writeheader()
 
     base_time = datetime(2024, 1, 1)
-    total_orders = 100000  # 100 万行，几十秒就能跑完！
+    total_orders = 1000000  
     
     for i in range(1, total_orders + 1):
         # 抽买家、商品、小时
@@ -49,7 +50,10 @@ with open("orders.csv", "w", newline="", encoding="utf-8") as f:
             minutes=random.randint(0, 59),
         )
         # 顺手制造脏数据：每 20 万条里，大概有 1 条会是空值
-        amount = round(random.uniform(10, 500), 2)
+        # 根据抽到的 item_id，去字典里查出真实单价，然后随机买 1 件或 2 件
+        base_price = item_prices[item_id]
+        amount = round(base_price * random.randint(1, 2), 2)
+       
         if random.random() < 0.000005:  
             amount = ""
 
